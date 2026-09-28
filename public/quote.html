@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get a quote - NIS Integration Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<div id="hdr"></div>
+<main><section><div class="wrap">
+  <h2 data-k="qT"></h2><p class="sub" data-k="qP"></p>
+  <form class="form" id="quoteForm" novalidate>
+    <div class="row">
+      <div><label for="name" data-f="name"></label><input id="name" name="name" required maxlength="100" autocomplete="name"></div>
+      <div><label for="company" data-f="company"></label><input id="company" name="company" maxlength="150" autocomplete="organization"></div>
+    </div>
+    <div class="row">
+      <div><label for="email" data-f="email"></label><input id="email" name="email" type="email" required maxlength="150" autocomplete="email"></div>
+      <div><label for="phone" data-f="phone"></label><input id="phone" name="phone" type="tel" maxlength="30" autocomplete="tel"></div>
+    </div>
+    <fieldset><legend data-f="svc"></legend><div class="chk" id="opts"></div></fieldset>
+    <div><label for="location" data-f="loc"></label><input id="location" name="location" maxlength="200"></div>
+    <div><label for="details" data-f="det"></label><textarea id="details" name="details" maxlength="2000"></textarea></div>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="msg" id="msg" role="status"></div>
+    <div><button class="btn" type="submit" data-f="send"></button></div>
+  </form>
+</div></section></main>
+<div id="ftr"></div>
+<script src="app.js"></script>
+</body></html>
