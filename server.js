@@ -23,18 +23,37 @@ const mailer = process.env.SMTP_HOST ? nodemailer.createTransport({
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ALLOWED = ['ILL','MetroWAN','OfficeWAN','Dark fiber','MPLS','IT support','Equipment leasing','IDC rack'];
 
+// Render free chặn cổng SMTP -> ưu tiên gửi qua Brevo HTTP API (HTTPS), fallback SMTP khi chạy local
+async function send({ to, subject, html, replyTo }) {
+  if (process.env.BREVO_API_KEY) {
+    const r = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'api-key': process.env.BREVO_API_KEY, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        sender: { name: process.env.MAIL_FROM_NAME || 'NIS Integration Solutions', email: process.env.MAIL_FROM_EMAIL },
+        to: to.split(',').map(e => ({ email: e.trim() })),
+        ...(replyTo ? { replyTo: { email: replyTo } } : {}),
+        subject, htmlContent: html
+      })
+    });
+    if (!r.ok) throw new Error('Brevo ' + r.status + ' ' + await r.text());
+    return;
+  }
+  if (!mailer) throw new Error('No mail provider configured');
+  return mailer.sendMail({ from: process.env.MAIL_FROM, to, subject, html, replyTo });
+}
+
 async function sendMails(q) {
-  if (!mailer) throw new Error('SMTP not configured');
   const vi = q.lang === 'vi';
   const rows = [['Name',q.name],['Company',q.company],['Email',q.email],['Phone',q.phone],
     ['Services',q.services.join(', ')],['Location',q.location],['Details',q.details],['Language',q.lang]]
     .map(([k,v]) => `<tr><td><b>${k}</b></td><td>${esc(v)}</td></tr>`).join('');
-  await mailer.sendMail({
+  await send({
     from: process.env.MAIL_FROM, to: process.env.SALES_TO, replyTo: q.email,
     subject: `[Quote #${q.id}] ${q.company || q.name} - ${q.services.join(', ')}`,
     html: `<table cellpadding="6">${rows}</table>`
   });
-  await mailer.sendMail({
+  await send({
     from: process.env.MAIL_FROM, to: q.email,
     subject: vi ? `Đã nhận yêu cầu báo giá #${q.id}` : `We received your quote request #${q.id}`,
     html: vi
