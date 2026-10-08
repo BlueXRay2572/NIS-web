@@ -1,4 +1,4 @@
-# NIS Integration Solutions
+# NIS INTEGRATION SOLUTIONS
 
 Yêu cầu: Node.js 18+.
 

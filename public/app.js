@@ -4,7 +4,7 @@ en: {
  nav:['Home','About us','Services','Contact','Get a quote'],
  heroBadge:'Enterprise telecom provider', st1:'SLA commitment', st2:'Domestic latency', st3:'Technical NOC support',
  heroT:'High-speed network infrastructure & comprehensive telecom solutions',
- heroP:'NIS Integration Solutions is a provider of telecom, network infrastructure and IT solutions, supporting businesses in building and growing their digital foundation. We deliver practical, stable and optimized solutions that help enterprises connect efficiently, operate smartly and grow sustainably in the digital era.',
+ heroP:'NIS INTEGRATION SOLUTIONS is a provider of telecom, network infrastructure and IT solutions, supporting businesses in building and growing their digital foundation. We deliver practical, stable and optimized solutions that help enterprises connect efficiently, operate smartly and grow sustainably in the digital era.',
  heroB1:'Get a quote', heroB2:'Explore services',
  whyT:'Why teams choose us',
  why:[['SLA-backed uptime','Written availability and repair-time commitments for every link.'],['24/7 NOC','Engineers monitor your services around the clock.'],['One contact','A single account team for links, support and hosting.']],
@@ -24,7 +24,7 @@ vi: {
  nav:['Trang chủ','Về chúng tôi','Dịch vụ','Liên hệ','Nhận báo giá'],
  heroBadge:'Nhà cung cấp viễn thông doanh nghiệp', st1:'Cam kết SLA', st2:'Độ trễ trong nước', st3:'Hỗ trợ kỹ thuật NOC',
  heroT:'Hạ tầng mạng tốc độ cao & giải pháp viễn thông toàn diện',
- heroP:'NIS Integration Solutions là đơn vị cung cấp giải pháp viễn thông, hạ tầng mạng và công nghệ thông tin, đồng hành cùng doanh nghiệp trong quá trình xây dựng và phát triển nền tảng số. Chúng tôi mang đến những giải pháp thiết thực, ổn định và tối ưu, giúp doanh nghiệp kết nối hiệu quả, vận hành thông minh và phát triển bền vững trong thời đại số.',
+ heroP:'NIS INTEGRATION SOLUTIONS là đơn vị cung cấp giải pháp viễn thông, hạ tầng mạng và công nghệ thông tin, đồng hành cùng doanh nghiệp trong quá trình xây dựng và phát triển nền tảng số. Chúng tôi mang đến những giải pháp thiết thực, ổn định và tối ưu, giúp doanh nghiệp kết nối hiệu quả, vận hành thông minh và phát triển bền vững trong thời đại số.',
  heroB1:'Nhận báo giá', heroB2:'Xem dịch vụ',
  whyT:'Vì sao khách hàng chọn chúng tôi',
  why:[['Uptime cam kết SLA','Cam kết bằng văn bản về độ khả dụng và thời gian khắc phục cho từng kênh.'],['NOC 24/7','Kỹ sư giám sát dịch vụ của bạn suốt ngày đêm.'],['Một đầu mối','Một đội phụ trách chung cho kênh truyền, hỗ trợ IT và hosting.']],
@@ -50,22 +50,27 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 let lang = (() => { try { return localStorage.getItem('lang') === 'vi' ? 'vi' : 'en'; } catch { return 'en'; } })();
 
 function chrome() {
-  $('#hdr').innerHTML = `<header><div class="wrap"><a class="logo" href="index.html"><img src="logo.png" alt="" height="40"><span>NIS Integration Solutions</span></a>
+  $('#hdr').innerHTML = `<header><div class="wrap"><a class="logo" href="index.html"><img id="logoImg" src="logo.png" alt="" height="40"><span>NIS INTEGRATION SOLUTIONS</span></a>
     <nav id="nav"><a href="index.html" data-n="0"></a><a href="about.html" data-n="1"></a><a href="services.html" data-n="2"></a><a href="index.html#contact" data-n="3"></a>
     <a class="btn" href="quote.html" data-n="4"></a></nav>
     <button class="lang" id="lang" aria-label="Language">EN | VI</button>
     <button class="menu" id="menu" aria-label="Menu">&#9776;</button></div></header>`;
-  $('#ftr').innerHTML = `<footer><div class="wrap"><span>&copy; ${new Date().getFullYear()} NIS Integration Solutions. <span data-k="foot"></span></span>
+  $('#ftr').innerHTML = `<footer><div class="wrap"><span>&copy; ${new Date().getFullYear()} NIS INTEGRATION SOLUTIONS. <span data-k="foot"></span></span>
     <span>support@nis-solutions.com | +84 973 232 812</span></div></footer>`;
   $('#lang').onclick = () => { lang = lang === 'en' ? 'vi' : 'en'; try { localStorage.setItem('lang', lang); } catch {} render(); };
   $('#menu').onclick = () => $('#nav').classList.toggle('open');
   // Home page: header blends into the hero at the top, turns solid once scrolled
-  if ($('.hero')) {
-    const hd = $('header');
-    hd.classList.add('overlay');
-    const upd = () => hd.classList.toggle('top', scrollY < 8);
-    upd(); addEventListener('scroll', upd, { passive: true });
-  }
+  const hd = $('header'), logo = $('#logoImg'), dark = matchMedia('(prefers-color-scheme: dark)');
+  const isHome = !!$('.hero');
+  if (isHome) hd.classList.add('overlay');
+  // light logo on dark backgrounds (hero top / dark mode), colour logo on white header
+  const upd = () => {
+    const top = isHome && scrollY < 8;
+    hd.classList.toggle('top', top);
+    logo.src = (top || dark.matches) ? 'logo-light.png' : 'logo.png';
+  };
+  new Image().src = 'logo-light.png';
+  upd(); addEventListener('scroll', upd, { passive: true });
 }
 
 function render() {
@@ -118,7 +123,7 @@ function services() {
   const D = $('#svcDetail');
   if (D) {
     const q = new URLSearchParams(location.search).get('s'), id = SV.includes(q) ? q : SV[0], x = u[id];
-    document.title = x.n + ' - NIS Integration Solutions';
+    document.title = x.n + ' - NIS INTEGRATION SOLUTIONS';
     D.innerHTML = `<a href="services.html">&larr; ${u.ui.all}</a><div class="two" style="margin-top:20px"><div class="art">${img(id)}</div>
       <div><h2>${x.n}</h2><p>${x.d}</p><h3 style="margin:18px 0 8px">${u.ui.feat}</h3><ul style="padding-left:18px;margin-bottom:24px">${x.f.map(f => `<li>${f}</li>`).join('')}</ul>
       <a class="btn" href="quote.html?svc=${encodeURIComponent(SV_OPT[id])}">${u.ui.quote}</a></div></div>`;

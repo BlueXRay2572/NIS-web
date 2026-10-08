@@ -30,7 +30,7 @@ async function send({ to, subject, html, replyTo }) {
       method: 'POST',
       headers: { 'api-key': process.env.BREVO_API_KEY, 'content-type': 'application/json' },
       body: JSON.stringify({
-        sender: { name: process.env.MAIL_FROM_NAME || 'NIS Integration Solutions', email: process.env.MAIL_FROM_EMAIL },
+        sender: { name: process.env.MAIL_FROM_NAME || 'NIS INTEGRATION SOLUTIONS', email: process.env.MAIL_FROM_EMAIL },
         to: to.split(',').map(e => ({ email: e.trim() })),
         ...(replyTo ? { replyTo: { email: replyTo } } : {}),
         subject, htmlContent: html
