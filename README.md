@@ -19,3 +19,8 @@ Yêu cầu: Node.js 18+.
 - Ảnh dịch vụ: `public/serviceimg/*.png` hiện là placeholder (khung nét đứt). Thay bằng ảnh thật cùng tên file để cập nhật ngay, không cần sửa code.
 - Nhóm dịch vụ (Connectivity / Colocation / IT Support) và nội dung từng dịch vụ: sửa trong `public/services-data.js` (`CAT_SVC`, `SV_T`).
 - Màu thương hiệu: khai báo ở đầu `public/style.css` trong khối `:root` (biến `--ink`, `--signal`, `--amber`).
+
+## Bản đồ ở section đầu
+- SVG bản đồ nằm trực tiếp trong `public/index.html` (thẻ `<svg class="map">`), được sinh từ dữ liệu Natural Earth (world-atlas). Hoàng Sa, Trường Sa là các cụm đảo vẽ theo toạ độ thực tế.
+- Ấn Độ và Tokyo là hai khung tròn (inset) vẽ phóng to, không đúng tỉ lệ so với bản đồ chính.
+- Nhãn song ngữ nằm trong `public/app.js` (các khoá `cHN`, `cDN`, `mapHS`, `mapTS`, `mapSea`...). Màu và hiệu ứng ở `public/style.css` (khối `.map`).

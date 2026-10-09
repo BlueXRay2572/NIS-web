@@ -2,6 +2,7 @@ const OPTS = ['ILL','MetroWAN','OfficeWAN','Dark fiber','MPLS','IT support','Equ
 const T = {
 en: {
  nav:['Home','About us','Services','Contact','Get a quote'],
+ cHN:'Hanoi', cDN:'Da Nang', cHCM:'HCMC', cHK:'Hong Kong', cBKK:'Bangkok', cSG:'Singapore', cIN:'India', cTYO:'Tokyo', mapHS:'Hoang Sa Archipelago', mapTS:'Truong Sa Archipelago', mapSea:'EAST SEA',
  heroBadge:'Enterprise telecom provider', st1:'SLA commitment', st2:'Domestic latency', st3:'Technical NOC support',
  heroT:'High-speed network infrastructure & comprehensive telecom solutions',
  heroP:'NIS INTEGRATION SOLUTIONS is a provider of telecom, network infrastructure and IT solutions, supporting businesses in building and growing their digital foundation. We deliver practical, stable and optimized solutions that help enterprises connect efficiently, operate smartly and grow sustainably in the digital era.',
@@ -22,6 +23,7 @@ en: {
 },
 vi: {
  nav:['Trang chủ','Về chúng tôi','Dịch vụ','Liên hệ','Nhận báo giá'],
+ cHN:'Hà Nội', cDN:'Đà Nẵng', cHCM:'TP.HCM', cHK:'Hong Kong', cBKK:'Bangkok', cSG:'Singapore', cIN:'Ấn Độ', cTYO:'Tokyo', mapHS:'Quần đảo Hoàng Sa', mapTS:'Quần đảo Trường Sa', mapSea:'BIỂN ĐÔNG',
  heroBadge:'Nhà cung cấp viễn thông doanh nghiệp', st1:'Cam kết SLA', st2:'Độ trễ trong nước', st3:'Hỗ trợ kỹ thuật NOC',
  heroT:'Hạ tầng mạng tốc độ cao & giải pháp viễn thông toàn diện',
  heroP:'NIS INTEGRATION SOLUTIONS là đơn vị cung cấp giải pháp viễn thông, hạ tầng mạng và công nghệ thông tin, đồng hành cùng doanh nghiệp trong quá trình xây dựng và phát triển nền tảng số. Chúng tôi mang đến những giải pháp thiết thực, ổn định và tối ưu, giúp doanh nghiệp kết nối hiệu quả, vận hành thông minh và phát triển bền vững trong thời đại số.',
