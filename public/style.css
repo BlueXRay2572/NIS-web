@@ -145,10 +145,10 @@ a.card:hover h3{color:var(--signal)}
 .map .links path{fill:none;stroke-linecap:round;stroke-dasharray:6 8;animation:flow 3s linear infinite}
 .map .links .int{stroke:#4cb8ee;stroke-width:1.7}
 .map .links .dom{stroke:rgba(242,162,59,.85);stroke-width:1.4}
+.map .rips .rip{pointer-events:none}
 .map .pk circle{fill:#fff;filter:drop-shadow(0 0 3px #5cc8ff)}
 .map .nodes .city{fill:#f2a23b;stroke:#fff;stroke-width:2}
 .map .nodes .end{fill:#04305a;stroke:#5cc8ff;stroke-width:2.5}
-.map .nodes .pulse{fill:none;stroke:#f2a23b;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-out infinite}
 .map text{font-family:'Roboto',sans-serif;fill:#e3f1fc;font-size:13px;paint-order:stroke;stroke:#03264a;stroke-width:3.5px;stroke-linejoin:round}
 .map .lbl .vn{font-weight:700;font-size:14px;fill:#fff}
 .map .geo-lbl text{font-size:12px;fill:#9fd4f5;font-style:italic}
@@ -156,7 +156,7 @@ a.card:hover h3{color:var(--signal)}
 @keyframes flow{to{stroke-dashoffset:-56}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
-@media(prefers-reduced-motion:reduce){.map *{animation:none!important}.map .pk{display:none}}
+@media(prefers-reduced-motion:reduce){.map *{animation:none!important}.map .pk,.map .rips{display:none}}
 @media(max-width:820px){.hero{min-height:0}.hero .wrap{grid-template-columns:1fr}.map{max-height:none}}
 
 .tc{text-align:center}
