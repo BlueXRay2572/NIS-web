@@ -48,31 +48,72 @@ const WHY_ICON = [
  '<svg class="why-ic" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 14v10l8 5"/></svg>',
  '<svg class="why-ic" viewBox="0 0 48 48"><circle cx="24" cy="17" r="7"/><path d="M10 40c0-8 6-13 14-13s14 5 14 13"/></svg>'
 ];
+WHY_ICON.push('<svg class="why-ic" viewBox="0 0 48 48"><path d="M8 14h20M36 14h4M8 24h6M22 24h18M8 34h24M40 34h0"/><circle cx="32" cy="14" r="4"/><circle cx="18" cy="24" r="4"/><circle cx="36" cy="34" r="4"/></svg>');
+Object.assign(T.en,{heroB2:'See more',
+ newsT:'Latest news',newsP:'Fresh updates from the telecom and network industry.',newsAll:'View all news',newsRead:'Read article',
+ newsPT:'Telecom & technology news',newsPP:'The 10 most recent stories from the global and Vietnamese telecom industry. Summaries are ours; each card opens the original source.',
+ fCo:'NIS INTEGRATION SOLUTIONS',fFollow:'Follow us',fSub:'Subscribe',fEmail:'Your email (required)',fSend:'SEND',fOk:'Thanks for subscribing!',fErr:'Please enter a valid email.',fTel:'Hotline',fLinks:'Quick links',fConn:'Connectivity',fColo:'Colocation & IT',
+ dScroll:'Learn more',dWhat:'What is {n}?',dUse:'Typical use cases',dBen:'Benefits of {n}',dCmp:'{n} compared with other options',dWhy:'Why choose NIS?',dWhyP:'One accountable team for your network, from design to 24/7 operation.'});
+Object.assign(T.vi,{heroB2:'Xem thêm',
+ newsT:'Tin tức mới nhất',newsP:'Cập nhật mới từ ngành viễn thông và hạ tầng mạng.',newsAll:'Xem tất cả tin tức',newsRead:'Đọc bài viết',
+ newsPT:'Tin tức viễn thông & công nghệ',newsPP:'10 tin mới nhất của ngành viễn thông thế giới và Việt Nam. Phần tóm tắt do chúng tôi viết; mỗi thẻ dẫn tới nguồn gốc bài viết.',
+ fCo:'NIS INTEGRATION SOLUTIONS',fFollow:'Theo dõi',fSub:'Đăng ký',fEmail:'Email của bạn (bắt buộc)',fSend:'GỬI',fOk:'Cảm ơn bạn đã đăng ký!',fErr:'Vui lòng nhập email hợp lệ.',fTel:'Hotline',fLinks:'Liên kết nhanh',fConn:'Dịch vụ kênh truyền',fColo:'Colocation & IT',
+ dScroll:'Tìm hiểu thêm',dWhat:'{n} là gì?',dUse:'Trường hợp sử dụng điển hình',dBen:'Lợi ích khi sử dụng {n}',dCmp:'So sánh {n} với các lựa chọn khác',dWhy:'Vì sao chọn NIS?',dWhyP:'Một đội ngũ chịu trách nhiệm cho mạng của bạn, từ thiết kế đến vận hành 24/7.'});
+T.en.nav.push('News');T.vi.nav.push('Tin tức');
+T.en.why.push(['Tailored design','Topology sized to your sites, traffic and growth plans.']);
+T.vi.why.push(['Thiết kế theo nhu cầu','Mô hình mạng phù hợp số điểm, lưu lượng và kế hoạch phát triển.']);
+const SOCIAL={facebook:'https://www.facebook.com/',linkedin:'https://www.linkedin.com/',twitter:'https://twitter.com/',email:'mailto:support@nis-solutions.com'}; // TODO: replace with the real company pages
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 let lang = (() => { try { return localStorage.getItem('lang') === 'vi' ? 'vi' : 'en'; } catch { return 'en'; } })();
 
 function chrome() {
   $('#hdr').innerHTML = `<header><div class="wrap"><a class="logo" href="index.html"><img id="logoImg" src="logo.png" alt="" height="40"><span>NIS INTEGRATION SOLUTIONS</span></a>
-    <nav id="nav"><a href="index.html" data-n="0"></a><a href="about.html" data-n="1"></a><a href="services.html" data-n="2"></a><a href="index.html#contact" data-n="3"></a>
-    <a class="btn" href="quote.html" data-n="4"></a></nav>
+    <nav id="nav"><a href="index.html" data-n="0"></a><a href="services.html" data-n="2"></a><a href="news.html" data-n="5"></a><a href="index.html#contact" data-n="3"></a></nav>
     <button class="lang" id="lang" aria-label="Language">EN | VI</button>
     <button class="menu" id="menu" aria-label="Menu">&#9776;</button></div></header>`;
-  $('#ftr').innerHTML = `<footer><div class="wrap"><span>&copy; ${new Date().getFullYear()} NIS INTEGRATION SOLUTIONS. <span data-k="foot"></span></span>
-    <span>support@nis-solutions.com | +84 973 232 812</span></div></footer>`;
+  const ic = {
+    facebook: '<svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.3H7.6V14h2.8v8z"/></svg>',
+    linkedin: '<svg viewBox="0 0 24 24"><path d="M6.9 8.9a1.9 1.9 0 110-3.8 1.9 1.9 0 010 3.8zM5.2 10.4h3.4V21H5.2zM10.8 10.4h3.2v1.5c.5-.9 1.6-1.8 3.3-1.8 3.4 0 4 2.2 4 5.1V21h-3.4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-3.4z"/></svg>',
+    twitter: '<svg viewBox="0 0 24 24"><path d="M17.8 4h2.9l-6.3 7.2L22 21h-5.8l-4.5-5.9L6.5 21H3.6l6.7-7.7L2.9 4h5.9l4.1 5.4zM16.8 19.3h1.6L8 5.6H6.3z"/></svg>',
+    email: '<svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>' };
+  $('#ftr').innerHTML = `<footer>
+    <div class="wrap">
+      <div class="f-top">
+        <div class="f-grp"><h4 data-k="fFollow"></h4><div class="f-social">${Object.keys(ic).map(k => `<a href="${SOCIAL[k]}" target="_blank" rel="noopener noreferrer" aria-label="${k}">${ic[k]}</a>`).join('')}</div></div>
+        <div><div class="f-grp"><h4 data-k="fSub"></h4>
+          <form class="f-sub" id="subForm" novalidate><input type="email" id="subEmail" required maxlength="150" autocomplete="email"><button type="submit" data-k="fSend"></button></form></div><div id="fMsg" role="status"></div></div>
+      </div>
+      <div class="f-main">
+        <div class="f-co"><img src="logo-light.png" alt=""><h5 data-k="fCo"></h5>
+          <p data-kh="addrV"></p><p><b>Hotline:</b> +84 973 232 812</p><p><b>Email:</b> support@nis-solutions.com</p></div>
+        <div><h5 data-k="fConn"></h5><ul id="fConn"></ul></div>
+        <div><h5 data-k="fColo"></h5><ul id="fColo"></ul></div>
+        <div><h5 data-k="fLinks"></h5><ul><li><a href="index.html" data-n="0"></a></li><li><a href="services.html" data-n="2"></a></li><li><a href="news.html" data-n="5"></a></li><li><a href="index.html#contact" data-n="3"></a></li><li><a href="quote.html" data-n="4"></a></li></ul></div>
+      </div>
+    </div>
+    <div class="f-bot"><div class="wrap"><span>&copy; ${new Date().getFullYear()} <b>NIS INTEGRATION SOLUTIONS</b>. <span data-k="foot"></span></span><button id="toTop" type="button" aria-label="Top">&#8963;</button></div></div></footer>`;
+  $('#toTop').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
+  $('#subForm').onsubmit = async e => {
+    e.preventDefault();
+    const em = $('#subEmail').value.trim(), box = $('#fMsg');
+    try {
+      const r = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: em, lang }) });
+      if (!r.ok) throw 0;
+      box.textContent = T[lang].fOk; $('#subEmail').value = '';
+    } catch { box.textContent = T[lang].fErr; }
+  };
   $('#lang').onclick = () => { lang = lang === 'en' ? 'vi' : 'en'; try { localStorage.setItem('lang', lang); } catch {} render(); };
   $('#menu').onclick = () => $('#nav').classList.toggle('open');
-  // Home page: header blends into the hero at the top, turns solid once scrolled
+  // Header sits transparent over a dark hero at the top of a page, and turns solid once scrolled
   const hd = $('header'), logo = $('#logoImg'), dark = matchMedia('(prefers-color-scheme: dark)');
-  const isHome = !!$('.hero');
-  if (isHome) hd.classList.add('overlay');
-  // light logo on dark backgrounds (hero top / dark mode), colour logo on white header
-  const upd = () => {
-    const top = isHome && scrollY < 8;
+  window.hdrUpd = () => {
+    const ov = !!$('.hero,.page-hero'), top = ov && scrollY < 8;
+    hd.classList.toggle('overlay', ov);
     hd.classList.toggle('top', top);
     logo.src = (top || dark.matches) ? 'logo-light.png' : 'logo.png';
   };
   new Image().src = 'logo-light.png';
-  upd(); addEventListener('scroll', upd, { passive: true });
+  addEventListener('scroll', () => window.hdrUpd(), { passive: true });
 }
 
 function render() {
@@ -85,7 +126,9 @@ function render() {
   $$('[data-w]').forEach(e => e.textContent = t.why[e.dataset.w][e.dataset.p]);
   $$('[data-wi]').forEach(e => e.innerHTML = WHY_ICON[e.dataset.wi]);
   $('#lang').innerHTML = lang === 'en' ? '<b>EN</b> | VI' : 'EN | <b>VI</b>';
-  services();
+  services(); footerFill(); newsRender();
+  if (typeof initNet === 'function') initNet();
+  if (window.hdrUpd) window.hdrUpd();
   const c = $('#opts');
   if (c) {
     const pre = new URLSearchParams(location.search).get('svc');
@@ -122,22 +165,82 @@ function services() {
     }
   }
 
-  const D = $('#svcDetail');
-  if (D) {
-    const q = new URLSearchParams(location.search).get('s'), id = SV.includes(q) ? q : SV[0], x = u[id];
-    document.title = x.n + ' - NIS INTEGRATION SOLUTIONS';
-    D.innerHTML = `<a href="services.html">&larr; ${u.ui.all}</a><div class="two" style="margin-top:20px"><div class="art">${img(id)}</div>
-      <div><h2>${x.n}</h2><p>${x.d}</p><h3 style="margin:18px 0 8px">${u.ui.feat}</h3><ul style="padding-left:18px;margin-bottom:24px">${x.f.map(f => `<li>${f}</li>`).join('')}</ul>
-      <a class="btn" href="quote.html?svc=${encodeURIComponent(SV_OPT[id])}">${u.ui.quote}</a></div></div>`;
-  }
+  renderDetail();
 
   function openCategory(cat) {
     const list = $('#svcList'); if (!list) return;
     list.innerHTML = CAT_SVC[cat].map(id => `<a class="card sv" href="service.html?s=${id}"><div class="art">${img(id)}</div><h3>${u[id].n}</h3><p>${u[id].s}</p><span class="more">${u.ui.more}</span></a>`).join('');
     list.hidden = false;
     const hint = $('#catHint'); if (hint) hint.hidden = true;
-    list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    list.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+}
+
+
+function footerFill() {
+  if (typeof SV_T === 'undefined') return;
+  const u = SV_T[lang], li = ids => ids.map(id => `<li><a href="service.html?s=${id}">${u[id].n}</a></li>`).join('');
+  $('#fConn') && ($('#fConn').innerHTML = li(CAT_SVC.conn));
+  $('#fColo') && ($('#fColo').innerHTML = li(CAT_SVC.colo.concat(CAT_SVC.it)));
+}
+
+/* ---------- News ---------- */
+const TAGICON = {
+  fiber: '<svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>',
+  ai: '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>',
+  sat: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M6 6a8.5 8.5 0 000 12M9 9a4.200 4.200 0 000 6M18 6a8.500 8.500 0 010 12M15 9a4.200 4.200 0 010 6"/></svg>',
+  g5: '<svg viewBox="0 0 24 24"><path d="M12 21v-8M8 21l4-8 4 8M5 9a10 10 0 0114 0M8 12a6 6 0 018 0"/></svg>',
+  cloud: '<svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 010-8 5 5 0 019.600-1A4.500 4.500 0 0117 18z"/></svg>',
+  voice: '<svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>' };
+let newsPage = 0;
+function newsCard(n) {
+  const c = n[lang], [y, m, d] = n.d.split('-');
+  const date = lang === 'vi' ? `${d}/${m}/${y}` : new Date(n.d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  return `<a class="nc" href="${n.url}" target="_blank" rel="noopener noreferrer"><div class="nc-thumb ${n.tag}">${TAGICON[n.tag]}</div>
+    <div class="nc-body"><div class="nc-meta"><b>${n.src}</b><span>${date}</span></div><h3>${c.t}</h3><p>${c.s}</p><span class="nc-foot">${T[lang].newsRead} &rarr;</span></div></a>`;
+}
+function newsRender() {
+  if (typeof NEWS === 'undefined') return;
+  const all = $('#newsAll');
+  if (all) all.innerHTML = NEWS.map(newsCard).join('');
+  const tr = $('#newsTrack'); if (!tr) return;
+  const six = NEWS.slice(0, 6);
+  tr.innerHTML = [0, 3].map(s => `<div class="nv-page">${six.slice(s, s + 3).map(newsCard).join('')}</div>`).join('');
+  $('#newsDots').innerHTML = [0, 1].map(i => `<button type="button" class="ag-dot" aria-label="${i + 1}"></button>`).join('');
+  const go = p => {
+    newsPage = (p + 2) % 2;
+    tr.style.transform = `translateX(-${newsPage * 100}%)`;
+    $$('#newsDots .ag-dot').forEach((d, i) => d.classList.toggle('active', i === newsPage));
+  };
+  $('#newsPrev').onclick = () => go(newsPage - 1);
+  $('#newsNext').onclick = () => go(newsPage + 1);
+  $$('#newsDots .ag-dot').forEach((d, i) => d.onclick = () => go(i));
+  tr.style.transition = 'none'; go(newsPage); requestAnimationFrame(() => tr.style.transition = '');
+}
+
+/* ---------- Service detail page ---------- */
+function renderDetail() {
+  const D = $('#svcDetail'); if (!D || typeof SC === 'undefined') return;
+  const u = SV_T[lang], t = T[lang], q = new URLSearchParams(location.search).get('s');
+  const id = SV.includes(q) ? q : SV[0], x = u[id], c = SC[lang][id], cat = CATS.find(k => CAT_SVC[k].includes(id));
+  const r = s => s.replace('{n}', x.n), quote = `quote.html?svc=${encodeURIComponent(SV_OPT[id])}`;
+  document.title = x.n + ' - NIS INTEGRATION SOLUTIONS';
+  D.innerHTML = `
+  <section class="page-hero dark-sec" data-net="dark"><div class="wrap hero-split">
+    <div><a class="crumb" href="services.html">&larr; ${u.ui.all}</a><br><span class="badge" style="margin-top:16px">${u.cat[cat]}</span>
+      <h1>${x.n}</h1><p>${x.s}</p>
+      <div class="btns"><a class="btn" href="${quote}">${u.ui.quote}</a><a class="btn ghost" href="#what">${t.dScroll}</a></div></div>
+    <div class="hero-img"><img src="serviceimg/${id}.png" alt="${x.n}"></div></div></section>
+  <section id="what" class="bg-circuit"><div class="wrap"><div class="sec-h"><span class="eyebrow">01</span><h2>${r(t.dWhat)}</h2></div>
+    <div class="what-grid"><p>${c.what}</p><div class="use-card"><h3>${t.dUse}</h3><ul>${c.use.map(i => `<li>${i}</li>`).join('')}</ul></div></div></div></section>
+  <section class="bg-hex"><div class="wrap"><div class="sec-h"><span class="eyebrow">02</span><h2>${r(t.dBen)}</h2></div>
+    <div class="ben-grid">${x.f.map((f, i) => `<div class="ben"><i>${i + 1}</i><b>${f}</b></div>`).join('')}</div></div></section>
+  <section class="bg-topo"><div class="wrap"><div class="sec-h"><span class="eyebrow">03</span><h2>${r(t.dCmp)}</h2></div>
+    <div class="cmp-wrap"><table class="cmp"><thead><tr><th></th>${c.cmp.h.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+    <tbody>${c.cmp.r.map(row => `<tr><th>${row[0]}</th>${row.slice(1).map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></section>
+  <section class="dark-sec" data-net="dark"><div class="wrap"><div class="sec-h"><span class="eyebrow" style="color:#7fd3ff">04</span><h2>${t.dWhy}</h2><p class="sub tc">${t.dWhyP}</p></div>
+    <div class="why-grid">${t.why.map((w, i) => `<div class="why-card">${WHY_ICON[i]}<b>${w[0]}</b><span>${w[1]}</span></div>`).join('')}</div>
+    <p class="tc-row"><a class="btn" href="${quote}">${u.ui.quote}</a></p></div></section>`;
 }
 
 /* ---------- Clients carousel ---------- */

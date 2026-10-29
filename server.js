@@ -13,6 +13,10 @@ db.exec(`CREATE TABLE IF NOT EXISTS quotes(
   email_status TEXT DEFAULT 'pending',
   created_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
 
+db.exec(`CREATE TABLE IF NOT EXISTS subscribers(
+  id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, lang TEXT,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
+
 const mailer = process.env.SMTP_HOST ? nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: +process.env.SMTP_PORT || 465,
@@ -87,6 +91,13 @@ app.post('/api/quote', rateLimit({ windowMs: 15*60*1000, max: 10 }), async (req,
   sendMails(q)
     .then(() => db.prepare('UPDATE quotes SET email_status=? WHERE id=?').run('sent', q.id))
     .catch(e => { console.error('Mail error:', e.message); db.prepare('UPDATE quotes SET email_status=? WHERE id=?').run('failed', q.id); });
+});
+
+app.post('/api/subscribe', rateLimit({ windowMs: 15*60*1000, max: 10 }), (req, res) => {
+  const em = String(req.body?.email ?? '').trim().slice(0, 150);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return res.status(400).json({ ok: false });
+  db.prepare('INSERT OR IGNORE INTO subscribers(email,lang) VALUES(?,?)').run(em, req.body.lang === 'vi' ? 'vi' : 'en');
+  res.json({ ok: true });
 });
 
 app.listen(process.env.PORT || 3000, () => console.log('Running on http://localhost:' + (process.env.PORT || 3000)));

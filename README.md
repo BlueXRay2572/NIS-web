@@ -24,3 +24,10 @@ Yêu cầu: Node.js 18+.
 - SVG bản đồ nằm trực tiếp trong `public/index.html` (thẻ `<svg class="map">`), được sinh từ dữ liệu Natural Earth (world-atlas). Hoàng Sa, Trường Sa là các cụm đảo vẽ theo toạ độ thực tế.
 - Ấn Độ và Tokyo là hai khung tròn (inset) vẽ phóng to, không đúng tỉ lệ so với bản đồ chính.
 - Nhãn song ngữ nằm trong `public/app.js` (các khoá `cHN`, `cDN`, `mapHS`, `mapTS`, `mapSea`...). Màu và hiệu ứng ở `public/style.css` (khối `.map`).
+
+## Tin tức, footer, chi tiết dịch vụ
+- Tin tức: sửa trong `public/news-data.js` (10 tin, tóm tắt tự viết, kèm link nguồn). 6 tin đầu hiện ở trang chủ (3 tin/trang), cả 10 tin ở `news.html`.
+- Chi tiết dịch vụ: nội dung "là gì / so sánh" trong `public/service-content.js`; lợi ích lấy từ `public/services-data.js`.
+- Ảnh dịch vụ: `public/serviceimg/*.png` (ảnh minh hoạ tạo sẵn, có thể thay bằng ảnh thật cùng tên).
+- Footer: link mạng xã hội sửa ở hằng `SOCIAL` đầu `public/app.js`. Email đăng ký lưu ở bảng `subscribers` (SQLite).
+- Nền động: `public/bg.js` (canvas) và các lớp `.bg-*` trong `public/style.css`.
