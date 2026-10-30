@@ -31,3 +31,7 @@ Yêu cầu: Node.js 18+.
 - Ảnh dịch vụ: `public/serviceimg/*.png` (ảnh minh hoạ tạo sẵn, có thể thay bằng ảnh thật cùng tên).
 - Footer: link mạng xã hội sửa ở hằng `SOCIAL` đầu `public/app.js`. Email đăng ký lưu ở bảng `subscribers` (SQLite).
 - Nền động: `public/bg.js` (canvas) và các lớp `.bg-*` trong `public/style.css`.
+
+## Trang liên hệ
+- `public/contact.html`: thông tin NIS + form (họ tên, email, chủ đề, nội dung) + 3 thẻ gọi điện / trò chuyện / đặt lịch họp. Mọi nút "Liên hệ tư vấn" đều dẫn về trang này; nút ở trang dịch vụ tự điền sẵn chủ đề (`?svc=`).
+- API: `POST /api/contact` lưu bảng `contacts` và gửi mail cho `SALES_TO` + mail xác nhận cho khách. Trang báo giá và API `/api/quote` cũ đã bỏ (bảng `quotes` cũ vẫn giữ dữ liệu).

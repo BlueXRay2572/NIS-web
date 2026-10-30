@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact - NIS INTEGRATION SOLUTIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<div id="hdr"></div>
+<main>
+<section class="page-hero dark-sec" data-net="dark" style="min-height:300px"><div class="wrap"><span class="badge" data-k="heroBadge"></span><h1 data-k="cT"></h1><p data-k="cSub"></p></div></section>
+<section class="bg-topo"><div class="wrap">
+  <div class="contact-grid">
+    <div>
+      <h2 class="ct-h" data-k="cInfo"></h2>
+      <div class="ci-grid">
+        <div class="ci"><span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.500A2.500 2.500 0 1112 6.500a2.500 2.500 0 010 5z"/></svg></span><h3 data-k="cAddr"></h3><p data-kh="addrV"></p></div>
+        <div class="ci"><span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.400l4 2.300-.8 1.300L11 13V7z"/></svg></span><h3 data-k="cHours"></h3><p data-kh="cHoursV"></p></div>
+        <div class="ci"><span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M3 6.500L12 3l9 3.500V19H3zm2 1.800V17h14V8.300L12 11zm7-3.200L6.700 7.200 12 9.400l5.300-2.200z"/></svg></span><h3 data-k="cMail"></h3><p><a href="mailto:support@nis-solutions.com">support@nis-solutions.com</a></p></div>
+        <div class="ci"><span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M6.600 10.800a15 15 0 006.600 6.600l2.200-2.200a1 1 0 011-.25 11.500 11.500 0 003.600.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.500a1 1 0 011 1c0 1.300.2 2.500.6 3.600a1 1 0 01-.25 1z"/></svg></span><h3 data-k="cPhone"></h3><p><a href="tel:+84973232812">+84 973 232 812</a></p></div>
+      </div>
+    </div>
+    <div>
+      <h2 class="ct-h" data-k="cFormT"></h2>
+      <form class="cform" id="contactForm" novalidate>
+        <label for="cName" data-k="cName"></label><input id="cName" name="name" required maxlength="100" autocomplete="name">
+        <label for="cEmail" data-k="cEmail"></label><input id="cEmail" name="email" type="email" required maxlength="150" autocomplete="email">
+        <label for="cSubject" data-k="cSubject"></label><input id="cSubject" name="subject" required maxlength="150">
+        <label for="cMessage" data-k="cMsg"></label><textarea id="cMessage" name="message" maxlength="2000"></textarea>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="msg" id="cMsgBox" role="status"></div>
+        <div><button class="btn" type="submit" data-k="cSend"></button></div>
+      </form>
+    </div>
+  </div>
+  <div class="cc-grid">
+    <a class="cc" href="tel:+84973232812"><svg viewBox="0 0 24 24"><path d="M6.600 10.800a15 15 0 006.600 6.600l2.200-2.200a1 1 0 011-.25 11.500 11.500 0 003.600.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.500a1 1 0 011 1c0 1.300.2 2.500.6 3.600a1 1 0 01-.25 1z"/></svg><h3 data-k="cc1T"></h3><p data-k="cc1D"></p></a>
+    <a class="cc" href="mailto:support@nis-solutions.com"><svg viewBox="0 0 24 24"><path d="M12 3C6.500 3 2 6.600 2 11c0 2.400 1.300 4.500 3.400 6L4.500 21l4.300-2.100c1 .2 2 .4 3.200.4 5.500 0 10-3.600 10-8S17.500 3 12 3z"/></svg><h3 data-k="cc2T"></h3><p data-k="cc2D"></p></a>
+    <a class="cc" id="cardMeet" href="#"><svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 8v10h12V10zm2 2h3v3H8zm5 0h3v3h-3z"/></svg><h3 data-k="cc3T"></h3><p data-k="cc3D"></p></a>
+  </div>
+</div></section></main>
+<div id="ftr"></div>
+<script src="services-data.js"></script>
+<script src="app.js"></script>
+<script src="bg.js"></script>
+</body></html>

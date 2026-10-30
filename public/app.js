@@ -1,7 +1,7 @@
 const OPTS = ['ILL','MetroWAN','OfficeWAN','Dark fiber','MPLS','IT support','Equipment leasing','IDC rack'];
 const T = {
 en: {
- nav:['Home','About us','Services','Contact','Get a quote'],
+ nav:['Home','About us','Services','Contact','Contact for consultation'],
  cHN:'Hanoi', cDN:'Da Nang', cHCM:'HCMC', cHK:'Hong Kong', cBKK:'Bangkok', cSG:'Singapore', cIN:'India', cTYO:'Tokyo', mapHS:'Hoang Sa Archipelago', mapTS:'Truong Sa Archipelago', mapSea:'EAST SEA',
  heroBadge:'Enterprise telecom provider', st1:'SLA commitment', st2:'Domestic latency', st3:'Technical NOC support',
  heroT:'High-speed network infrastructure & comprehensive telecom solutions',
@@ -22,7 +22,7 @@ en: {
  opt:{'ILL':'ILL','MetroWAN':'MetroWAN','OfficeWAN':'OfficeWAN','Dark fiber':'Dark fiber','MPLS':'MPLS','IT support':'IT support','Equipment leasing':'Equipment leasing','IDC rack':'IDC rack'}
 },
 vi: {
- nav:['Trang chủ','Về chúng tôi','Dịch vụ','Liên hệ','Nhận báo giá'],
+ nav:['Trang chủ','Về chúng tôi','Dịch vụ','Liên hệ','Liên hệ tư vấn'],
  cHN:'Hà Nội', cDN:'Đà Nẵng', cHCM:'TP.HCM', cHK:'Hong Kong', cBKK:'Bangkok', cSG:'Singapore', cIN:'Ấn Độ', cTYO:'Tokyo', mapHS:'Quần đảo Hoàng Sa', mapTS:'Quần đảo Trường Sa', mapSea:'BIỂN ĐÔNG',
  heroBadge:'Nhà cung cấp viễn thông doanh nghiệp', st1:'Cam kết SLA', st2:'Độ trễ trong nước', st3:'Hỗ trợ kỹ thuật NOC',
  heroT:'Hạ tầng mạng tốc độ cao & giải pháp viễn thông toàn diện',
@@ -59,6 +59,18 @@ Object.assign(T.vi,{heroB2:'Xem thêm',
  newsPT:'Tin tức viễn thông & công nghệ',newsPP:'10 tin mới nhất của ngành viễn thông thế giới và Việt Nam. Phần tóm tắt do chúng tôi viết; mỗi thẻ dẫn tới nguồn gốc bài viết.',
  fCo:'NIS INTEGRATION SOLUTIONS',fFollow:'Theo dõi',fSub:'Đăng ký',fEmail:'Email của bạn (bắt buộc)',fSend:'GỬI',fOk:'Cảm ơn bạn đã đăng ký!',fErr:'Vui lòng nhập email hợp lệ.',fTel:'Hotline',fLinks:'Liên kết nhanh',fConn:'Dịch vụ kênh truyền',fColo:'Colocation & IT',
  dScroll:'Tìm hiểu thêm',dWhat:'{n} là gì?',dUse:'Trường hợp sử dụng điển hình',dBen:'Lợi ích khi sử dụng {n}',dCmp:'So sánh {n} với các lựa chọn khác',dWhy:'Vì sao chọn NIS?',dWhyP:'Một đội ngũ chịu trách nhiệm cho mạng của bạn, từ thiết kế đến vận hành 24/7.'});
+Object.assign(T.en,{cT:'Contact',cSub:'Tell us about your project. Our team replies within one business day.',cInfo:'Contact information',
+ cAddr:'Address',cHours:'Opening hours',cHoursV:'Monday – Friday: 8:00 AM – 5:30 PM<br>NOC support: 24/7',cMail:'E-mail',cPhone:'Phone',
+ cFormT:'Have a question? Get in touch with us!',cName:'Your name',cEmail:'Your email',cSubject:'Subject',cMsg:'Your message (optional)',cSend:'SUBMIT',cSending:'Sending...',
+ cOk:'Thank you! Your message has been sent. Please check your email for a confirmation.',cErr:'Could not send. Please check your name, email and subject, then try again.',
+ cc1T:'CALL US DIRECTLY',cc1D:'Talk to our experts about the best options for your business.',cc2T:'CHAT WITH OUR SALES TEAM',cc2D:'Chat with one of our sales representatives to learn more about our services and solutions.',
+ cc3T:'BOOK A MEETING',cc3D:'Schedule a time to speak with one of our sales representatives.',subjPre:'Consultation: ',subjMeet:'Meeting request'});
+Object.assign(T.vi,{cT:'Liên hệ',cSub:'Cho chúng tôi biết về dự án của bạn. Đội ngũ sẽ phản hồi trong vòng một ngày làm việc.',cInfo:'Thông tin liên hệ',
+ cAddr:'Địa chỉ',cHours:'Thời gian làm việc',cHoursV:'Thứ hai – thứ sáu: 8:00 – 17:30<br>Hỗ trợ NOC: 24/7',cMail:'E-mail',cPhone:'Điện thoại',
+ cFormT:'Nếu bạn có bất kỳ câu hỏi nào? Hãy liên lạc với chúng tôi!',cName:'Họ và tên',cEmail:'Email của bạn',cSubject:'Chủ đề',cMsg:'Nội dung (không bắt buộc)',cSend:'GỬI',cSending:'Đang gửi...',
+ cOk:'Cảm ơn bạn! Tin nhắn đã được gửi. Vui lòng kiểm tra email để xem xác nhận.',cErr:'Không gửi được. Vui lòng kiểm tra họ tên, email, chủ đề và thử lại.',
+ cc1T:'GỌI TRỰC TIẾP CHO CHÚNG TÔI',cc1D:'Liên hệ ngay với các chuyên gia của chúng tôi để thảo luận về các lựa chọn tốt nhất cho doanh nghiệp của bạn.',cc2T:'TRÒ CHUYỆN VỚI ĐỘI NGŨ KINH DOANH',cc2D:'Trò chuyện với một trong những đại diện kinh doanh của chúng tôi để tìm hiểu thêm về các giải pháp và dịch vụ của NIS.',
+ cc3T:'ĐẶT MỘT CUỘC HỌP',cc3D:'Lên lịch thời gian để nói chuyện với một trong những đại diện kinh doanh của chúng tôi.',subjPre:'Tư vấn dịch vụ: ',subjMeet:'Đặt lịch họp'});
 T.en.nav.push('News');T.vi.nav.push('Tin tức');
 T.en.why.push(['Tailored design','Topology sized to your sites, traffic and growth plans.']);
 T.vi.why.push(['Thiết kế theo nhu cầu','Mô hình mạng phù hợp số điểm, lưu lượng và kế hoạch phát triển.']);
@@ -68,7 +80,7 @@ let lang = (() => { try { return localStorage.getItem('lang') === 'vi' ? 'vi' : 
 
 function chrome() {
   $('#hdr').innerHTML = `<header><div class="wrap"><a class="logo" href="index.html"><img id="logoImg" src="logo.png" alt="" height="40"><span>NIS INTEGRATION SOLUTIONS</span></a>
-    <nav id="nav"><a href="index.html" data-n="0"></a><a href="services.html" data-n="2"></a><a href="news.html" data-n="5"></a><a href="index.html#contact" data-n="3"></a></nav>
+    <nav id="nav"><a href="index.html" data-n="0"></a><a href="services.html" data-n="2"></a><a href="news.html" data-n="5"></a><a href="contact.html" data-n="3"></a></nav>
     <button class="lang" id="lang" aria-label="Language">EN | VI</button>
     <button class="menu" id="menu" aria-label="Menu">&#9776;</button></div></header>`;
   const ic = {
@@ -88,7 +100,7 @@ function chrome() {
           <p data-kh="addrV"></p><p><b>Hotline:</b> +84 973 232 812</p><p><b>Email:</b> support@nis-solutions.com</p></div>
         <div><h5 data-k="fConn"></h5><ul id="fConn"></ul></div>
         <div><h5 data-k="fColo"></h5><ul id="fColo"></ul></div>
-        <div><h5 data-k="fLinks"></h5><ul><li><a href="index.html" data-n="0"></a></li><li><a href="services.html" data-n="2"></a></li><li><a href="news.html" data-n="5"></a></li><li><a href="index.html#contact" data-n="3"></a></li><li><a href="quote.html" data-n="4"></a></li></ul></div>
+        <div><h5 data-k="fLinks"></h5><ul><li><a href="index.html" data-n="0"></a></li><li><a href="services.html" data-n="2"></a></li><li><a href="news.html" data-n="5"></a></li><li><a href="contact.html" data-n="3"></a></li></ul></div>
       </div>
     </div>
     <div class="f-bot"><div class="wrap"><span>&copy; ${new Date().getFullYear()} <b>NIS INTEGRATION SOLUTIONS</b>. <span data-k="foot"></span></span><button id="toTop" type="button" aria-label="Top">&#8963;</button></div></div></footer>`;
@@ -223,7 +235,7 @@ function renderDetail() {
   const D = $('#svcDetail'); if (!D || typeof SC === 'undefined') return;
   const u = SV_T[lang], t = T[lang], q = new URLSearchParams(location.search).get('s');
   const id = SV.includes(q) ? q : SV[0], x = u[id], c = SC[lang][id], cat = CATS.find(k => CAT_SVC[k].includes(id));
-  const r = s => s.replace('{n}', x.n), quote = `quote.html?svc=${encodeURIComponent(SV_OPT[id])}`;
+  const r = s => s.replace('{n}', x.n), quote = `contact.html?svc=${encodeURIComponent(SV_OPT[id])}`;
   document.title = x.n + ' - NIS INTEGRATION SOLUTIONS';
   D.innerHTML = `
   <section class="page-hero dark-sec" data-net="dark"><div class="wrap hero-split">
@@ -308,6 +320,26 @@ function aboutGallery() {
   $$('.ag-dot').forEach((d, i) => d.onclick = () => go(i));
 }
 
+function contactForm() {
+  const form = $('#contactForm'); if (!form) return;
+  const box = $('#cMsgBox'), subj = $('#cSubject');
+  const svc = new URLSearchParams(location.search).get('svc');
+  if (svc) subj.value = T[lang].subjPre + svc;
+  $('#cardMeet')?.addEventListener('click', e => { e.preventDefault(); subj.value = T[lang].subjMeet; form.scrollIntoView({ behavior: 'smooth', block: 'center' }); $('#cName').focus(); });
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form)); d.lang = lang;
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = T[lang].cSending; box.className = 'msg';
+    try {
+      const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) });
+      if (!r.ok) throw 0;
+      box.textContent = T[lang].cOk; box.className = 'msg ok'; form.reset();
+    } catch { box.textContent = T[lang].cErr; box.className = 'msg err'; }
+    btn.disabled = false; btn.textContent = T[lang].cSend;
+  };
+}
+
 function quoteForm() {
   const form = $('#quoteForm'); if (!form) return;
   const box = $('#msg');
@@ -326,4 +358,4 @@ function quoteForm() {
     btn.disabled = false; btn.textContent = T[lang].f.send;
   };
 }
-chrome(); render(); clientsCarousel(); aboutGallery(); quoteForm();
+chrome(); render(); clientsCarousel(); aboutGallery(); contactForm();

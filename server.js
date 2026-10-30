@@ -13,6 +13,10 @@ db.exec(`CREATE TABLE IF NOT EXISTS quotes(
   email_status TEXT DEFAULT 'pending',
   created_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
 
+db.exec(`CREATE TABLE IF NOT EXISTS contacts(
+  id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, subject TEXT NOT NULL,
+  message TEXT, lang TEXT, email_status TEXT DEFAULT 'pending',
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
 db.exec(`CREATE TABLE IF NOT EXISTS subscribers(
   id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, lang TEXT,
   created_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
@@ -25,7 +29,6 @@ const mailer = process.env.SMTP_HOST ? nodemailer.createTransport({
 }) : null;
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const ALLOWED = ['ILL','MetroWAN','OfficeWAN','Dark fiber','MPLS','IT support','Equipment leasing','IDC rack'];
 
 // Render free chặn cổng SMTP -> ưu tiên gửi qua Brevo HTTP API (HTTPS), fallback SMTP khi chạy local
 async function send({ to, subject, html, replyTo }) {
@@ -47,22 +50,17 @@ async function send({ to, subject, html, replyTo }) {
   return mailer.sendMail({ from: process.env.MAIL_FROM, to, subject, html, replyTo });
 }
 
-async function sendMails(q) {
-  const vi = q.lang === 'vi';
-  const rows = [['Name',q.name],['Company',q.company],['Email',q.email],['Phone',q.phone],
-    ['Services',q.services.join(', ')],['Location',q.location],['Details',q.details],['Language',q.lang]]
+async function sendContactMails(c) {
+  const vi = c.lang === 'vi';
+  const rows = [['Name',c.name],['Email',c.email],['Subject',c.subject],['Message',c.message],['Language',c.lang]]
     .map(([k,v]) => `<tr><td><b>${k}</b></td><td>${esc(v)}</td></tr>`).join('');
+  await send({ to: process.env.SALES_TO, replyTo: c.email, subject: `[Contact #${c.id}] ${c.subject}`, html: `<table cellpadding="6">${rows}</table>` });
   await send({
-    from: process.env.MAIL_FROM, to: process.env.SALES_TO, replyTo: q.email,
-    subject: `[Quote #${q.id}] ${q.company || q.name} - ${q.services.join(', ')}`,
-    html: `<table cellpadding="6">${rows}</table>`
-  });
-  await send({
-    from: process.env.MAIL_FROM, to: q.email,
-    subject: vi ? `Đã nhận yêu cầu báo giá #${q.id}` : `We received your quote request #${q.id}`,
+    to: c.email,
+    subject: vi ? `Đã nhận liên hệ #${c.id}` : `We received your message #${c.id}`,
     html: vi
-      ? `<p>Chào ${esc(q.name)},</p><p>Cảm ơn bạn đã liên hệ. Đội ngũ kinh doanh sẽ phản hồi trong vòng 1 ngày làm việc.</p><p>Dịch vụ quan tâm: ${esc(q.services.join(', '))}</p>`
-      : `<p>Hi ${esc(q.name)},</p><p>Thanks for reaching out. Our sales team will reply within 1 business day.</p><p>Services requested: ${esc(q.services.join(', '))}</p>`
+      ? `<p>Chào ${esc(c.name)},</p><p>Cảm ơn bạn đã liên hệ NIS INTEGRATION SOLUTIONS. Đội ngũ của chúng tôi sẽ phản hồi trong vòng 1 ngày làm việc.</p><p>Chủ đề: ${esc(c.subject)}</p>`
+      : `<p>Hi ${esc(c.name)},</p><p>Thanks for contacting NIS INTEGRATION SOLUTIONS. Our team will reply within 1 business day.</p><p>Subject: ${esc(c.subject)}</p>`
   });
 }
 
@@ -70,27 +68,17 @@ const app = express();
 app.use(express.json({ limit: '50kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/api/quote', rateLimit({ windowMs: 15*60*1000, max: 10 }), async (req, res) => {
+app.post('/api/contact', rateLimit({ windowMs: 15*60*1000, max: 10 }), (req, res) => {
   const b = req.body || {};
   if (b.website) return res.json({ ok: true }); // honeypot: bot
   const clean = (v, n) => String(v ?? '').trim().slice(0, n);
-  const q = {
-    name: clean(b.name, 100), company: clean(b.company, 150), email: clean(b.email, 150),
-    phone: clean(b.phone, 30), location: clean(b.location, 200), details: clean(b.details, 2000),
-    lang: b.lang === 'vi' ? 'vi' : 'en',
-    services: (Array.isArray(b.services) ? b.services : []).filter(s => ALLOWED.includes(s))
-  };
-  if (!q.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(q.email) || !q.services.length)
-    return res.status(400).json({ ok: false, error: 'invalid' });
-
-  const info = db.prepare(`INSERT INTO quotes(name,company,email,phone,services,location,details,lang)
-    VALUES(?,?,?,?,?,?,?,?)`).run(q.name,q.company,q.email,q.phone,q.services.join(', '),q.location,q.details,q.lang);
-  q.id = info.lastInsertRowid;
-  res.json({ ok: true, id: q.id }); // dữ liệu đã lưu; gửi mail chạy nền
-
-  sendMails(q)
-    .then(() => db.prepare('UPDATE quotes SET email_status=? WHERE id=?').run('sent', q.id))
-    .catch(e => { console.error('Mail error:', e.message); db.prepare('UPDATE quotes SET email_status=? WHERE id=?').run('failed', q.id); });
+  const c = { name: clean(b.name, 100), email: clean(b.email, 150), subject: clean(b.subject, 150), message: clean(b.message, 2000), lang: b.lang === 'vi' ? 'vi' : 'en' };
+  if (!c.name || !c.subject || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)) return res.status(400).json({ ok: false, error: 'invalid' });
+  c.id = db.prepare('INSERT INTO contacts(name,email,subject,message,lang) VALUES(?,?,?,?,?)').run(c.name, c.email, c.subject, c.message, c.lang).lastInsertRowid;
+  res.json({ ok: true, id: c.id }); // saved first; mail runs in the background
+  sendContactMails(c)
+    .then(() => db.prepare('UPDATE contacts SET email_status=? WHERE id=?').run('sent', c.id))
+    .catch(e => { console.error('Mail error:', e.message); db.prepare('UPDATE contacts SET email_status=? WHERE id=?').run('failed', c.id); });
 });
 
 app.post('/api/subscribe', rateLimit({ windowMs: 15*60*1000, max: 10 }), (req, res) => {
