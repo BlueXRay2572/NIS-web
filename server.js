@@ -34,6 +34,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 async function send({ to, subject, html, replyTo }) {
   if (process.env.BREVO_API_KEY) {
     const r = await fetch('https://api.brevo.com/v3/smtp/email', {
+      signal: AbortSignal.timeout(15000),
       method: 'POST',
       headers: { 'api-key': process.env.BREVO_API_KEY, 'content-type': 'application/json' },
       body: JSON.stringify({
@@ -50,11 +51,16 @@ async function send({ to, subject, html, replyTo }) {
   return mailer.sendMail({ from: process.env.MAIL_FROM, to, subject, html, replyTo });
 }
 
-async function sendContactMails(c) {
-  const vi = c.lang === 'vi';
+// Where contact-form messages are delivered (override with CONTACT_TO on the server)
+const CONTACT_TO = process.env.CONTACT_TO || 'trungtuan@nis-solutions.com';
+
+async function notifyContact(c) {
   const rows = [['Name',c.name],['Email',c.email],['Subject',c.subject],['Message',c.message],['Language',c.lang]]
     .map(([k,v]) => `<tr><td><b>${k}</b></td><td>${esc(v)}</td></tr>`).join('');
-  await send({ to: process.env.SALES_TO, replyTo: c.email, subject: `[Contact #${c.id}] ${c.subject}`, html: `<table cellpadding="6">${rows}</table>` });
+  await send({ to: CONTACT_TO, replyTo: c.email, subject: `[Contact #${c.id}] ${c.subject}`, html: `<table cellpadding="6">${rows}</table>` });
+}
+async function confirmContact(c) {
+  const vi = c.lang === 'vi';
   await send({
     to: c.email,
     subject: vi ? `Đã nhận liên hệ #${c.id}` : `We received your message #${c.id}`,
@@ -65,20 +71,27 @@ async function sendContactMails(c) {
 }
 
 const app = express();
+app.set('trust proxy', 1); // behind Render's proxy: rate-limit per visitor, not per proxy
 app.use(express.json({ limit: '50kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/api/contact', rateLimit({ windowMs: 15*60*1000, max: 10 }), (req, res) => {
+app.post('/api/contact', rateLimit({ windowMs: 15*60*1000, max: 10 }), async (req, res) => {
   const b = req.body || {};
   if (b.website) return res.json({ ok: true }); // honeypot: bot
   const clean = (v, n) => String(v ?? '').trim().slice(0, n);
   const c = { name: clean(b.name, 100), email: clean(b.email, 150), subject: clean(b.subject, 150), message: clean(b.message, 2000), lang: b.lang === 'vi' ? 'vi' : 'en' };
   if (!c.name || !c.subject || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)) return res.status(400).json({ ok: false, error: 'invalid' });
   c.id = db.prepare('INSERT INTO contacts(name,email,subject,message,lang) VALUES(?,?,?,?,?)').run(c.name, c.email, c.subject, c.message, c.lang).lastInsertRowid;
-  res.json({ ok: true, id: c.id }); // saved first; mail runs in the background
-  sendContactMails(c)
-    .then(() => db.prepare('UPDATE contacts SET email_status=? WHERE id=?').run('sent', c.id))
-    .catch(e => { console.error('Mail error:', e.message); db.prepare('UPDATE contacts SET email_status=? WHERE id=?').run('failed', c.id); });
+  try {
+    await notifyContact(c);          // the message goes straight to CONTACT_TO before we answer the visitor
+    db.prepare('UPDATE contacts SET email_status=? WHERE id=?').run('sent', c.id);
+  } catch (e) {
+    console.error('Mail error:', e.message);
+    db.prepare('UPDATE contacts SET email_status=? WHERE id=?').run('failed', c.id);
+    return res.status(502).json({ ok: false, error: 'mail' });
+  }
+  res.json({ ok: true, id: c.id });
+  confirmContact(c).catch(e => console.error('Confirmation mail error:', e.message)); // best effort
 });
 
 app.post('/api/subscribe', rateLimit({ windowMs: 15*60*1000, max: 10 }), (req, res) => {

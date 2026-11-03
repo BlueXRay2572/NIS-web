@@ -36,7 +36,7 @@ vi: {
  contactT:'Liên hệ', contactP:'Cho chúng tôi biết về dự án của bạn hoặc liên hệ trực tiếp với đội ngũ.',
  addr:'Địa chỉ', addrV:'VPĐD: 314/6 Điện Biên Phủ, Phường Vườn Lài, TP.HCM.<br>Trụ sở chính (GPKD): 347/64/5 Lê Văn Thọ, Phường Thông Tây Hội, TP.HCM.',
  hrs:'Hỗ trợ', hrsV:'NOC 24/7, kinh doanh T2-T6 8:00-17:30',
- clientsT:'Khách hàng tiêu biểu', clientsP:'Một số tổ chức đang vận hành mạng và hạ tầng cùng chúng tôi.',
+ clientsT:'Khách hàng tiêu biểu', clientsP:'',
  foot:'Bảo lưu mọi quyền.',
  qT:'Nhận báo giá', qP:'Cho chúng tôi biết nhu cầu của bạn. Chúng tôi phản hồi trong vòng một ngày làm việc.',
  f:{name:'Họ và tên',company:'Công ty',email:'Email công việc',phone:'Số điện thoại',svc:'Dịch vụ cần báo giá',loc:'Địa điểm lắp đặt',det:'Yêu cầu (băng thông, số lượng, thời gian)',send:'Gửi yêu cầu',sending:'Đang gửi...',ok:'Đã gửi yêu cầu. Vui lòng kiểm tra email để xem xác nhận.',err:'Không gửi được. Hãy kiểm tra các trường bắt buộc và thử lại.'},
@@ -62,15 +62,18 @@ Object.assign(T.vi,{heroB2:'Xem thêm',
 Object.assign(T.en,{cT:'Contact',cSub:'Tell us about your project. Our team replies within one business day.',cInfo:'Contact information',
  cAddr:'Address',cHours:'Opening hours',cHoursV:'Monday – Friday: 8:00 AM – 5:30 PM<br>NOC support: 24/7',cMail:'E-mail',cPhone:'Phone',
  cFormT:'Have a question? Get in touch with us!',cName:'Your name',cEmail:'Your email',cSubject:'Subject',cMsg:'Your message (optional)',cSend:'SUBMIT',cSending:'Sending...',
- cOk:'Thank you! Your message has been sent. Please check your email for a confirmation.',cErr:'Could not send. Please check your name, email and subject, then try again.',
+ cOk:'Thank you! Your message has been sent. Please check your email for a confirmation.',cErr:'Could not send. Please check your name, email and subject, then try again.',cErrSrv:'Sorry, we could not deliver your message right now. Please try again later or call +84 973 232 812.',newsMore:'Read more »',
  cc1T:'CALL US DIRECTLY',cc1D:'Talk to our experts about the best options for your business.',cc2T:'CHAT WITH OUR SALES TEAM',cc2D:'Chat with one of our sales representatives to learn more about our services and solutions.',
  cc3T:'BOOK A MEETING',cc3D:'Schedule a time to speak with one of our sales representatives.',subjPre:'Consultation: ',subjMeet:'Meeting request'});
 Object.assign(T.vi,{cT:'Liên hệ',cSub:'Cho chúng tôi biết về dự án của bạn. Đội ngũ sẽ phản hồi trong vòng một ngày làm việc.',cInfo:'Thông tin liên hệ',
  cAddr:'Địa chỉ',cHours:'Thời gian làm việc',cHoursV:'Thứ hai – thứ sáu: 8:00 – 17:30<br>Hỗ trợ NOC: 24/7',cMail:'E-mail',cPhone:'Điện thoại',
  cFormT:'Nếu bạn có bất kỳ câu hỏi nào? Hãy liên lạc với chúng tôi!',cName:'Họ và tên',cEmail:'Email của bạn',cSubject:'Chủ đề',cMsg:'Nội dung (không bắt buộc)',cSend:'GỬI',cSending:'Đang gửi...',
- cOk:'Cảm ơn bạn! Tin nhắn đã được gửi. Vui lòng kiểm tra email để xem xác nhận.',cErr:'Không gửi được. Vui lòng kiểm tra họ tên, email, chủ đề và thử lại.',
+ cOk:'Cảm ơn bạn! Tin nhắn đã được gửi. Vui lòng kiểm tra email để xem xác nhận.',cErr:'Không gửi được. Vui lòng kiểm tra họ tên, email, chủ đề và thử lại.',cErrSrv:'Rất tiếc, hiện chưa gửi được tin nhắn. Vui lòng thử lại sau hoặc gọi +84 973 232 812.',newsMore:'Xem thêm »',
  cc1T:'GỌI TRỰC TIẾP CHO CHÚNG TÔI',cc1D:'Liên hệ ngay với các chuyên gia của chúng tôi để thảo luận về các lựa chọn tốt nhất cho doanh nghiệp của bạn.',cc2T:'TRÒ CHUYỆN VỚI ĐỘI NGŨ KINH DOANH',cc2D:'Trò chuyện với một trong những đại diện kinh doanh của chúng tôi để tìm hiểu thêm về các giải pháp và dịch vụ của NIS.',
  cc3T:'ĐẶT MỘT CUỘC HỌP',cc3D:'Lên lịch thời gian để nói chuyện với một trong những đại diện kinh doanh của chúng tôi.',subjPre:'Tư vấn dịch vụ: ',subjMeet:'Đặt lịch họp'});
+Object.assign(T.en,{aBack:'All news',aKey:'Key points',aWhy:'Why it matters for your business',aSrc:'Source',aOrig:'Read the original article',aNote:'This article is an original summary written by NIS based on the source above. All rights to the original reporting belong to its publisher.',aMore:'More news',aCta:'Need help planning your network?',aCtaP:'Our engineers can design the right connectivity for your sites.'});
+Object.assign(T.vi,{aBack:'Tất cả tin tức',aKey:'Điểm chính',aWhy:'Ý nghĩa với doanh nghiệp của bạn',aSrc:'Nguồn',aOrig:'Đọc bài gốc',aNote:'Bài viết là bản tóm tắt do NIS viết lại dựa trên nguồn nêu trên. Mọi bản quyền của bài báo gốc thuộc về đơn vị xuất bản.',aMore:'Tin liên quan',aCta:'Cần hỗ trợ thiết kế mạng cho doanh nghiệp?',aCtaP:'Kỹ sư của chúng tôi sẽ tư vấn giải pháp kết nối phù hợp cho các điểm của bạn.'});
+const TAGNAME={en:{fiber:'Fiber',ai:'AI',sat:'Satellite',g5:'5G',cloud:'Cloud',voice:'Voice AI'},vi:{fiber:'Cáp quang',ai:'AI',sat:'Vệ tinh',g5:'5G',cloud:'Cloud',voice:'Voice AI'}};
 T.en.nav.push('News');T.vi.nav.push('Tin tức');
 T.en.why.push(['Tailored design','Topology sized to your sites, traffic and growth plans.']);
 T.vi.why.push(['Thiết kế theo nhu cầu','Mô hình mạng phù hợp số điểm, lưu lượng và kế hoạch phát triển.']);
@@ -122,9 +125,9 @@ function chrome() {
     const ov = !!$('.hero,.page-hero'), top = ov && scrollY < 8;
     hd.classList.toggle('overlay', ov);
     hd.classList.toggle('top', top);
-    logo.src = (top || dark.matches) ? 'logo-light.png' : 'logo.png';
+    logo.src = (top || dark.matches) ? 'logo.png' : 'logo.png';
   };
-  new Image().src = 'logo-light.png';
+  new Image().src = 'logo.png';
   addEventListener('scroll', () => window.hdrUpd(), { passive: true });
 }
 
@@ -138,7 +141,7 @@ function render() {
   $$('[data-w]').forEach(e => e.textContent = t.why[e.dataset.w][e.dataset.p]);
   $$('[data-wi]').forEach(e => e.innerHTML = WHY_ICON[e.dataset.wi]);
   $('#lang').innerHTML = lang === 'en' ? '<b>EN</b> | VI' : 'EN | <b>VI</b>';
-  services(); footerFill(); newsRender();
+  services(); footerFill(); newsRender(); renderArticle();
   if (typeof initNet === 'function') initNet();
   if (window.hdrUpd) window.hdrUpd();
   const c = $('#opts');
@@ -205,16 +208,28 @@ const TAGICON = {
   cloud: '<svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 010-8 5 5 0 019.600-1A4.500 4.500 0 0117 18z"/></svg>',
   voice: '<svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>' };
 let newsPage = 0;
+function newsDate(n) {
+  const [y, m, d] = n.d.split('-');
+  return lang === 'vi' ? `${d}/${m}/${y}` : new Date(n.d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
 function newsCard(n) {
-  const c = n[lang], [y, m, d] = n.d.split('-');
-  const date = lang === 'vi' ? `${d}/${m}/${y}` : new Date(n.d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-  return `<a class="nc" href="${n.url}" target="_blank" rel="noopener noreferrer"><div class="nc-thumb ${n.tag}">${TAGICON[n.tag]}</div>
-    <div class="nc-body"><div class="nc-meta"><b>${n.src}</b><span>${date}</span></div><h3>${c.t}</h3><p>${c.s}</p><span class="nc-foot">${T[lang].newsRead} &rarr;</span></div></a>`;
+  const c = n[lang];
+  return `<a class="nc" href="article.html?id=${n.id}"><div class="nc-thumb"><img src="newsimg/${n.id}.png" alt="" loading="lazy"><span class="nc-tag">${TAGNAME[lang][n.tag]}</span></div>
+    <div class="nc-body"><div class="nc-meta"><b>${n.src}</b><span>${newsDate(n)}</span></div><h3>${c.t}</h3><p>${c.s}</p><span class="nc-foot">${T[lang].newsRead} &rarr;</span></div></a>`;
+}
+function npDate(n) {
+  const [y, m, d] = n.d.split('-');
+  return lang === 'vi' ? `${+d} Tháng ${+m}, ${y}` : new Date(n.d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function npCard(n) {
+  const c = n[lang], href = `article.html?id=${n.id}`;
+  return `<article class="np"><a class="np-img" href="${href}"><img src="newsimg/${n.id}.png" alt="" loading="lazy"></a>
+    <h3><a href="${href}">${c.t}</a></h3><time>${npDate(n)}</time><p>${c.s}</p><a class="np-more" href="${href}">${T[lang].newsMore}</a></article>`;
 }
 function newsRender() {
   if (typeof NEWS === 'undefined') return;
   const all = $('#newsAll');
-  if (all) all.innerHTML = NEWS.map(newsCard).join('');
+  if (all) all.innerHTML = NEWS.map(npCard).join('');
   const tr = $('#newsTrack'); if (!tr) return;
   const six = NEWS.slice(0, 6);
   tr.innerHTML = [0, 3].map(s => `<div class="nv-page">${six.slice(s, s + 3).map(newsCard).join('')}</div>`).join('');
@@ -228,6 +243,27 @@ function newsRender() {
   $('#newsNext').onclick = () => go(newsPage + 1);
   $$('#newsDots .ag-dot').forEach((d, i) => d.onclick = () => go(i));
   tr.style.transition = 'none'; go(newsPage); requestAnimationFrame(() => tr.style.transition = '');
+}
+
+/* ---------- News article page ---------- */
+function renderArticle() {
+  const D = $('#newsArticle'); if (!D || typeof NEWS === 'undefined') return;
+  const q = new URLSearchParams(location.search).get('id'), idx = Math.max(0, NEWS.findIndex(n => n.id === q)), n = NEWS[idx], c = n[lang], t = T[lang];
+  const more = [1, 2, 3].map(k => NEWS[(idx + k) % NEWS.length]);
+  document.title = c.t + ' - NIS INTEGRATION SOLUTIONS';
+  D.innerHTML = `
+  <section class="page-hero dark-sec" data-net="dark"><div class="wrap hero-split">
+    <div><a class="crumb" href="news.html">&larr; ${t.aBack}</a><br><span class="badge" style="margin-top:16px">${TAGNAME[lang][n.tag]}</span>
+      <h1 class="art-h1">${c.t}</h1><p>${c.s}</p><p class="art-meta">${newsDate(n)} &middot; ${t.aSrc}: ${n.src}</p></div>
+    <div class="hero-img"><img src="newsimg/${n.id}.png" alt=""></div></div></section>
+  <section class="art-sec"><div class="wrap"><article class="art-body">
+    ${c.b.map(p => `<p>${p}</p>`).join('')}
+    <div class="key-box"><h3>${t.aKey}</h3><ul>${c.k.map(x => `<li>${x}</li>`).join('')}</ul></div>
+    <div class="why-box"><h3>${t.aWhy}</h3><p>${c.w}</p></div>
+    <div class="src-box"><p><b>${t.aSrc}:</b> ${n.src} &middot; ${newsDate(n)}</p><a class="btn alt" href="${n.url}" target="_blank" rel="noopener noreferrer">${t.aOrig} &rarr;</a><small>${t.aNote}</small></div>
+  </article></div></section>
+  <section class="art-sec art-more"><div class="wrap"><h2 class="np-sub">${t.aMore}</h2><hr class="np-rule"><div class="np-grid">${more.map(npCard).join('')}</div></div></section>
+  <section class="art-sec art-cta"><div class="wrap tc"><h2>${t.aCta}</h2><p class="sub tc">${t.aCtaP}</p><p class="tc-row"><a class="btn" href="contact.html">${t.nav[4]}</a></p></div></section>`;
 }
 
 /* ---------- Service detail page ---------- */
@@ -333,9 +369,9 @@ function contactForm() {
     btn.disabled = true; btn.textContent = T[lang].cSending; box.className = 'msg';
     try {
       const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) });
-      if (!r.ok) throw 0;
+      if (!r.ok) throw r.status;
       box.textContent = T[lang].cOk; box.className = 'msg ok'; form.reset();
-    } catch { box.textContent = T[lang].cErr; box.className = 'msg err'; }
+    } catch (st) { box.textContent = st === 400 ? T[lang].cErr : T[lang].cErrSrv; box.className = 'msg err'; }
     btn.disabled = false; btn.textContent = T[lang].cSend;
   };
 }
