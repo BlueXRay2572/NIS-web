@@ -99,7 +99,7 @@ function chrome() {
           <form class="f-sub" id="subForm" novalidate><input type="email" id="subEmail" required maxlength="150" autocomplete="email"><button type="submit" data-k="fSend"></button></form></div><div id="fMsg" role="status"></div></div>
       </div>
       <div class="f-main">
-        <div class="f-co"><img src="logo-light.png" alt=""><h5 data-k="fCo"></h5>
+        <div class="f-co"><img src="logo.png" alt=""><h5 data-k="fCo"></h5>
           <p data-kh="addrV"></p><p><b>Hotline:</b> +84 973 232 812</p><p><b>Email:</b> support@nis-solutions.com</p></div>
         <div><h5 data-k="fConn"></h5><ul id="fConn"></ul></div>
         <div><h5 data-k="fColo"></h5><ul id="fColo"></ul></div>
