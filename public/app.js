@@ -53,12 +53,12 @@ Object.assign(T.en,{heroB2:'See more',
  newsT:'Latest news',newsP:'Fresh updates from the telecom and network industry.',newsAll:'View all news',newsRead:'Read article',
  newsPT:'Telecom & technology news',newsPP:'The 10 most recent stories from the global and Vietnamese telecom industry. Summaries are ours; each card opens the original source.',
  fCo:'NIS INTEGRATION SOLUTIONS',fFollow:'Follow us',fSub:'Subscribe',fEmail:'Your email (required)',fSend:'SEND',fOk:'Thanks for subscribing!',fErr:'Please enter a valid email.',fTel:'Hotline',fLinks:'Quick links',fConn:'Connectivity',fColo:'Colocation & IT',
- dScroll:'Learn more',dWhat:'What is {n}?',dUse:'Typical use cases',dBen:'Benefits of {n}',dCmp:'{n} compared with other options',dWhy:'Why choose NIS?',dWhyP:'One accountable team for your network, from design to 24/7 operation.'});
+ dScroll:'Learn more',bcHome:'Home',tabCh:'Characteristics',tabFe:'Features',tabCmp:'Comparison',dDetail:'Solution details',dRelated:'Related products',dWhat:'What is {n}?',dUse:'Typical use cases',dBen:'Benefits of {n}',dCmp:'{n} compared with other options',dWhy:'Why choose NIS?',dWhyP:'One accountable team for your network, from design to 24/7 operation.'});
 Object.assign(T.vi,{heroB2:'Xem thêm',
  newsT:'Tin tức mới nhất',newsP:'Cập nhật mới từ ngành viễn thông và hạ tầng mạng.',newsAll:'Xem tất cả tin tức',newsRead:'Đọc bài viết',
  newsPT:'Tin tức viễn thông & công nghệ',newsPP:'10 tin mới nhất của ngành viễn thông thế giới và Việt Nam. Phần tóm tắt do chúng tôi viết; mỗi thẻ dẫn tới nguồn gốc bài viết.',
  fCo:'NIS INTEGRATION SOLUTIONS',fFollow:'Theo dõi',fSub:'Đăng ký',fEmail:'Email của bạn (bắt buộc)',fSend:'GỬI',fOk:'Cảm ơn bạn đã đăng ký!',fErr:'Vui lòng nhập email hợp lệ.',fTel:'Hotline',fLinks:'Liên kết nhanh',fConn:'Dịch vụ kênh truyền',fColo:'Colocation & IT',
- dScroll:'Tìm hiểu thêm',dWhat:'{n} là gì?',dUse:'Trường hợp sử dụng điển hình',dBen:'Lợi ích khi sử dụng {n}',dCmp:'So sánh {n} với các lựa chọn khác',dWhy:'Vì sao chọn NIS?',dWhyP:'Một đội ngũ chịu trách nhiệm cho mạng của bạn, từ thiết kế đến vận hành 24/7.'});
+ dScroll:'Tìm hiểu thêm',bcHome:'Trang chủ',tabCh:'Đặc điểm',tabFe:'Tính năng',tabCmp:'So sánh',dDetail:'Chi tiết giải pháp',dRelated:'Sản phẩm liên quan',dWhat:'{n} là gì?',dUse:'Trường hợp sử dụng điển hình',dBen:'Lợi ích khi sử dụng {n}',dCmp:'So sánh {n} với các lựa chọn khác',dWhy:'Vì sao chọn NIS?',dWhyP:'Một đội ngũ chịu trách nhiệm cho mạng của bạn, từ thiết kế đến vận hành 24/7.'});
 Object.assign(T.en,{cT:'Contact',cSub:'Tell us about your project. Our team replies within one business day.',cInfo:'Contact information',
  cAddr:'Address',cHours:'Opening hours',cHoursV:'Monday – Friday: 8:00 AM – 5:30 PM<br>NOC support: 24/7',cMail:'E-mail',cPhone:'Phone',
  cFormT:'Have a question? Get in touch with us!',cName:'Your name',cEmail:'Your email',cSubject:'Subject',cMsg:'Your message (optional)',cSend:'SUBMIT',cSending:'Sending...',
@@ -267,28 +267,40 @@ function renderArticle() {
 }
 
 /* ---------- Service detail page ---------- */
+let detailTab = 0;
 function renderDetail() {
   const D = $('#svcDetail'); if (!D || typeof SC === 'undefined') return;
   const u = SV_T[lang], t = T[lang], q = new URLSearchParams(location.search).get('s');
   const id = SV.includes(q) ? q : SV[0], x = u[id], c = SC[lang][id], cat = CATS.find(k => CAT_SVC[k].includes(id));
-  const r = s => s.replace('{n}', x.n), quote = `contact.html?svc=${encodeURIComponent(SV_OPT[id])}`;
+  const quote = `contact.html?svc=${encodeURIComponent(SV_OPT[id])}`;
   document.title = x.n + ' - NIS INTEGRATION SOLUTIONS';
+  const tabs = [c.tn ? c.tn[0] : t.tabCh, c.tn ? c.tn[1] : t.tabFe, t.tabCmp];
+  const cards = arr => `<div class="sc-grid">${arr.map(v => `<div class="sc-card"><span class="sc-ic">${SOL_ICON[v[0]]}</span><h3>${v[1]}</h3>${v[2] ? `<p>${v[2]}</p>` : ''}</div>`).join('')}</div>`;
+  const cmp = `<div class="cmp-wrap"><table class="cmp"><thead><tr><th></th>${c.cmp.h.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+    <tbody>${c.cmp.r.map(row => `<tr><th>${row[0]}</th>${row.slice(1).map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const panels = [cards(c.t1), cards(c.t2), cmp];
+  const related = SV.filter(s => s !== id).sort((a, b) => CAT_SVC[cat].includes(b) - CAT_SVC[cat].includes(a)).slice(0, 3);
   D.innerHTML = `
   <section class="page-hero dark-sec" data-net="dark"><div class="wrap hero-split">
-    <div><a class="crumb" href="services.html">&larr; ${u.ui.all}</a><br><span class="badge" style="margin-top:16px">${u.cat[cat]}</span>
-      <h1>${x.n}</h1><p>${x.s}</p>
-      <div class="btns"><a class="btn" href="${quote}">${u.ui.quote}</a><a class="btn ghost" href="#what">${t.dScroll}</a></div></div>
+    <div><nav class="bc"><a href="index.html">${t.bcHome}</a><span>&rsaquo;</span><a href="services.html">${u.ui.t}</a><span>&rsaquo;</span><a href="services.html?cat=${cat}">${u.cat[cat]}</a><span>&rsaquo;</span><b>${x.n}</b></nav>
+      <h1>${x.n}</h1>${c.lead ? `<p class="lead">${c.lead}</p>` : ''}<p>${c.what}</p>
+      <p class="hot"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.500 11.500 0 003.600.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.500a1 1 0 011 1c0 1.300.2 2.500.6 3.600a1 1 0 01-.25 1z"/></svg>Hotline: <a href="tel:+84973232812">+84 973 232 812</a></p>
+      <div class="btns"><a class="btn" href="${quote}">${u.ui.quote}</a></div></div>
     <div class="hero-img"><img src="serviceimg/${id}.png" alt="${x.n}"></div></div></section>
-  <section id="what" class="bg-circuit"><div class="wrap"><div class="sec-h"><span class="eyebrow">01</span><h2>${r(t.dWhat)}</h2></div>
-    <div class="what-grid"><p>${c.what}</p><div class="use-card"><h3>${t.dUse}</h3><ul>${c.use.map(i => `<li>${i}</li>`).join('')}</ul></div></div></div></section>
-  <section class="bg-hex"><div class="wrap"><div class="sec-h"><span class="eyebrow">02</span><h2>${r(t.dBen)}</h2></div>
-    <div class="ben-grid">${x.f.map((f, i) => `<div class="ben"><i>${i + 1}</i><b>${f}</b></div>`).join('')}</div></div></section>
-  <section class="bg-topo"><div class="wrap"><div class="sec-h"><span class="eyebrow">03</span><h2>${r(t.dCmp)}</h2></div>
-    <div class="cmp-wrap"><table class="cmp"><thead><tr><th></th>${c.cmp.h.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-    <tbody>${c.cmp.r.map(row => `<tr><th>${row[0]}</th>${row.slice(1).map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></section>
-  <section class="dark-sec" data-net="dark"><div class="wrap"><div class="sec-h"><span class="eyebrow" style="color:#7fd3ff">04</span><h2>${t.dWhy}</h2><p class="sub tc">${t.dWhyP}</p></div>
+  <section class="bg-plain sc-sec"><div class="wrap"><h2 class="sc-h">${t.dDetail}</h2>
+    <div class="tabs" role="tablist">${tabs.map((n, i) => `<button type="button" role="tab" class="tab${i === detailTab ? ' active' : ''}" data-tab="${i}">${n}</button>`).join('')}</div>
+    ${panels.map((p, i) => `<div class="tabpanel" data-panel="${i}"${i === detailTab ? '' : ' hidden'}>${p}</div>`).join('')}</div></section>
+  <section class="dark-sec" data-net="dark"><div class="wrap"><div class="sec-h"><h2>${t.dWhy}</h2><p class="sub tc">${t.dWhyP}</p></div>
     <div class="why-grid">${t.why.map((w, i) => `<div class="why-card">${WHY_ICON[i]}<b>${w[0]}</b><span>${w[1]}</span></div>`).join('')}</div>
-    <p class="tc-row"><a class="btn" href="${quote}">${u.ui.quote}</a></p></div></section>`;
+    <p class="tc-row"><a class="btn" href="${quote}">${u.ui.quote}</a></p></div></section>
+  <section class="rel-sec"><div class="wrap"><h2 class="np-sub">${t.dRelated}</h2><hr class="np-rule">
+    <div class="np-grid">${related.map(r => `<article class="np"><a class="np-img" href="service.html?s=${r}"><img src="serviceimg/${r}.png" alt="" loading="lazy"></a><h3><a href="service.html?s=${r}">${u[r].n}</a></h3><p>${u[r].s}</p><a class="np-more" href="service.html?s=${r}">${t.newsMore}</a></article>`).join('')}</div></div></section>`;
+  D.onclick = e => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    detailTab = +b.dataset.tab;
+    $$('.tab').forEach(k => k.classList.toggle('active', k === b));
+    $$('.tabpanel').forEach(p => p.hidden = +p.dataset.panel !== detailTab);
+  };
 }
 
 /* ---------- Clients carousel ---------- */
